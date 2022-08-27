@@ -16,6 +16,7 @@
   "author": "Camilo Jaimes",
   "license": "MIT",
   "dependencies": {
+    "awesome-qr": "^2.1.5-rc.0",
     "colors": "^1.4.0",
     "inquirer": "^9.1.0"
   }

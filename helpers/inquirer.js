@@ -6,29 +6,15 @@ const menu = [
         type: 'list',
         name: 'opcion',
         message: '¿Que desea hacer?',
-        choices: [
-            {
-                value: 1,
-                name: `${ '1.'.green } Registrarse`
-            },
-            {
-                value: 2,
-                name: `${ '2.'.green } Iniciar Sesion`
-            },
-            {
-                value: 3,
-                name: `${ '3.'.green } Salir`
-            }
-        ],
-    },
+    }
 ];
 
-const inquirerMenu = async () => {
+const inquirerMenu = async ( choices = []) => {
     console.clear();
     console.log('==========================='.green);
     console.log('   Seleccione una opción   '.white);
     console.log('===========================\n'.green);
- 
+    menu[0].choices = choices;
     const { opcion } = await inquirer.prompt( menu );
     return opcion;
 };
@@ -43,4 +29,23 @@ const pausa = async () => {
     console.log('\n');
 }
 
-export { inquirerMenu, pausa };
+const leerInput = async ( message ) => {
+
+    const question = [
+        {
+            type: 'input',
+            name: 'desc',
+            message,
+            validate( value ) {
+                if( value.length === 0 ) {
+                    return 'Por favor ingrese un valor';
+                }
+                return true;
+            }
+        }
+    ];
+    const { desc } = await inquirer.prompt( question );
+    return desc;
+}
+
+export { inquirerMenu, pausa, leerInput };
